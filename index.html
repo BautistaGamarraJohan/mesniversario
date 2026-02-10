@@ -254,16 +254,112 @@
         }
 
         .audio-player {
-            background: white;
-            border-radius: 15px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .vinyl-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 1rem 0;
+        }
+
+        .vinyl {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, #2a2a2a 0%, #1a1a1a 40%, #000 100%);
+            border-radius: 50%;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .vinyl.spinning {
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .vinyl::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #8b0000 0%, #4a0000 100%);
+            border-radius: 50%;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .vinyl::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Líneas del vinilo */
+        .vinyl-grooves {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            top: 0;
+            left: 0;
+        }
+
+        .vinyl-grooves::before,
+        .vinyl-grooves::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .vinyl-grooves::before {
+            top: 10%;
+            left: 10%;
+            right: 10%;
+            bottom: 10%;
+        }
+
+        .vinyl-grooves::after {
+            top: 20%;
+            left: 20%;
+            right: 20%;
+            bottom: 20%;
+        }
+
+        .audio-controls {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .audio-player audio {
             width: 100%;
             border-radius: 10px;
+            filter: hue-rotate(320deg) saturate(1.5);
         }
 
         /* Footer */
@@ -300,15 +396,18 @@
                 text-align: center;
             }
 
+            /* Mantener grid 3x3 en móvil para conservar la X */
             .fotos-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.5rem;
             }
         }
 
         @media (max-width: 480px) {
+            /* Mantener grid 3x3 incluso en pantallas muy pequeñas */
             .fotos-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.3rem;
             }
         }
     </style>
@@ -393,7 +492,7 @@
                 <p class="carta-texto">
                     Gracias por estos 6 meses aunque no sean perfectos, amo estar contigo, Solo espero que vengan muchos meses más de amor, risas y felicidad juntos.
                 </p>
-                <div class="carta-firma">Con todo mi amor, Johanzu</div>
+                <div class="carta-firma">Con todo mi amor, Johanzuk</div>
             </div>
         </div>
     </section>
@@ -408,14 +507,21 @@
                 <div class="song-info">
                     <div class="song-title">Como Dormiste Bebé</div>
                     <div class="song-artist">Rels B</div>
-                    <div class="song-reason">Con esta canción comenzamos a hablar por Instagram muehehe.</div>
+                    <div class="song-reason">Con esta canción comenzamos a hablar por Instagram ♡</div>
                 </div>
                 <button class="play-btn" onclick="togglePlay('audio1', this)">▶️</button>
             </div>
             <div class="audio-player">
-                <audio id="audio1" controls>
-                    <source src="music/Rels B - cómo dormiste_ (Video Oficial).mp3" type="audio/mpeg">
-                </audio>
+                <div class="vinyl-container">
+                    <div class="vinyl" id="vinyl1">
+                        <div class="vinyl-grooves"></div>
+                    </div>
+                </div>
+                <div class="audio-controls">
+                    <audio id="audio1" controls>
+                        <source src="music/Rels B - cómo dormiste_ (Video Oficial).mp3" type="audio/mpeg">
+                    </audio>
+                </div>
             </div>
 
             <div class="song-item">
@@ -423,14 +529,21 @@
                 <div class="song-info">
                     <div class="song-title">Bound 2</div>
                     <div class="song-artist">Kanye West</div>
-                    <div class="song-reason">El puto fokin negro bello q amas</div>
+                    <div class="song-reason">Nuestra vibra juntos</div>
                 </div>
                 <button class="play-btn" onclick="togglePlay('audio2', this)">▶️</button>
             </div>
             <div class="audio-player">
-                <audio id="audio2" controls>
-                    <source src="music/Kanye West - Bound 2  (Sub. Español).mp3" type="audio/mpeg">
-                </audio>
+                <div class="vinyl-container">
+                    <div class="vinyl" id="vinyl2">
+                        <div class="vinyl-grooves"></div>
+                    </div>
+                </div>
+                <div class="audio-controls">
+                    <audio id="audio2" controls>
+                        <source src="music/Kanye West - Bound 2  (Sub. Español).mp3" type="audio/mpeg">
+                    </audio>
+                </div>
             </div>
 
             <div class="song-item">
@@ -438,14 +551,21 @@
                 <div class="song-info">
                     <div class="song-title">Comenzar de Nuevo</div>
                     <div class="song-artist">Jhovan Tomasevich</div>
-                    <div class="song-reason">La canción que me dijiste que te recuerda a mí. Por cómo estamos ahora, un poco distantes ñañañaña te amo.</div>
+                    <div class="song-reason">La canción que me dijiste que te recuerda a mí. Por cómo estamos ahora, un poco distantes pero siempre juntos en el corazón</div>
                 </div>
                 <button class="play-btn" onclick="togglePlay('audio3', this)">▶️</button>
             </div>
             <div class="audio-player">
-                <audio id="audio3" controls>
-                    <source src="music/Comenzar de nuevo - Jhovan Tomasevich (Letra).mp3" type="audio/mpeg">
-                </audio>
+                <div class="vinyl-container">
+                    <div class="vinyl" id="vinyl3">
+                        <div class="vinyl-grooves"></div>
+                    </div>
+                </div>
+                <div class="audio-controls">
+                    <audio id="audio3" controls>
+                        <source src="music/Comenzar de nuevo - Jhovan Tomasevich (Letra).mp3" type="audio/mpeg">
+                    </audio>
+                </div>
             </div>
         </div>
     </section>
@@ -524,14 +644,18 @@
         // Función para controlar play/pause de audio
         function togglePlay(audioId, button) {
             const audio = document.getElementById(audioId);
+            const vinylNumber = audioId.replace('audio', '');
+            const vinyl = document.getElementById('vinyl' + vinylNumber);
             const allAudios = document.querySelectorAll('audio');
             const allButtons = document.querySelectorAll('.play-btn');
+            const allVinyls = document.querySelectorAll('.vinyl');
             
-            // Pausar todos los otros audios
+            // Pausar todos los otros audios y detener vinilos
             allAudios.forEach((a, index) => {
                 if (a.id !== audioId && !a.paused) {
                     a.pause();
                     allButtons[index].textContent = '▶️';
+                    allVinyls[index].classList.remove('spinning');
                 }
             });
             
@@ -539,16 +663,36 @@
             if (audio.paused) {
                 audio.play();
                 button.textContent = '⏸️';
+                vinyl.classList.add('spinning');
             } else {
                 audio.pause();
                 button.textContent = '▶️';
+                vinyl.classList.remove('spinning');
             }
             
-            // Actualizar botón cuando la canción termina
+            // Actualizar botón y vinilo cuando la canción termina
             audio.onended = function() {
                 button.textContent = '▶️';
+                vinyl.classList.remove('spinning');
             };
         }
+
+        // Hacer girar vinilos cuando se usa el reproductor nativo
+        document.querySelectorAll('audio').forEach((audio, index) => {
+            const vinyl = document.getElementById('vinyl' + (index + 1));
+            
+            audio.addEventListener('play', function() {
+                vinyl.classList.add('spinning');
+            });
+            
+            audio.addEventListener('pause', function() {
+                vinyl.classList.remove('spinning');
+            });
+            
+            audio.addEventListener('ended', function() {
+                vinyl.classList.remove('spinning');
+            });
+        });
     </script>
 </body>
 </html>

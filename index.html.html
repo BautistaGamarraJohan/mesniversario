@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6 Meses Juntos ♥ Johan & Naomy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --rosa: #ffb3ba;
+            --rosa-claro: #ffe5e8;
+            --morado: #e0b3ff;
+            --crema: #fffbf5;
+            --texto: #4a4a4a;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, var(--crema), var(--rosa-claro));
+            color: var(--texto);
+            line-height: 1.6;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: var(--rosa);
+            margin-bottom: 1rem;
+        }
+
+        .hero h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #888;
+            letter-spacing: 3px;
+        }
+
+        /* Secciones */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            text-align: center;
+            color: var(--rosa);
+            margin-bottom: 3rem;
+        }
+
+        /* Galería */
+        .galeria {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .fotos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .foto-item {
+            aspect-ratio: 1;
+            background: var(--rosa-claro);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .foto-item img,
+        .foto-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .foto-item:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .foto-vacia {
+            visibility: hidden;
+        }
+
+        /* Estadísticas */
+        .stats {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: var(--rosa-claro);
+            border-radius: 15px;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--rosa);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--texto);
+        }
+
+        /* Carta */
+        .carta {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .carta-contenido {
+            background: var(--crema);
+            padding: 3rem;
+            border-radius: 15px;
+            border-left: 4px solid var(--rosa);
+        }
+
+        .carta-saludo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--rosa);
+            margin-bottom: 2rem;
+        }
+
+        .carta-texto {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .carta-firma {
+            text-align: right;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--rosa);
+            margin-top: 2rem;
+        }
+
+        /* Playlist */
+        .playlist {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .song-item {
+            background: var(--rosa-claro);
+            border-radius: 15px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .song-item:hover {
+            transform: translateX(5px);
+            background: var(--morado);
+        }
+
+        .song-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--rosa);
+            min-width: 50px;
+        }
+
+        .song-info {
+            flex: 1;
+        }
+
+        .song-title {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .song-artist {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .song-reason {
+            font-size: 0.9rem;
+            color: var(--rosa);
+            font-style: italic;
+            margin-top: 0.3rem;
+        }
+
+        .play-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            padding: 0.5rem;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.3);
+        }
+
+        .audio-player {
+            background: white;
+            border-radius: 15px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .audio-player audio {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--rosa);
+        }
+
+        footer .heart {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            section {
+                padding: 3rem 1rem;
+            }
+
+            .galeria, .stats, .carta, .playlist {
+                padding: 2rem 1rem;
+            }
+
+            .carta-contenido {
+                padding: 2rem 1.5rem;
+            }
+
+            .song-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .fotos-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .fotos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero -->
+    <section class="hero">
+        <h1>6 Meses</h1>
+        <h2>Johan & Naomy</h2>
+        <p>08.08.2025 — 08.02.2026</p>
+    </section>
+
+    <!-- Estadísticas -->
+    <section>
+        <div class="stats">
+            <h2 class="section-title">Nuestro Tiempo Juntos</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">184</span>
+                    <span class="stat-label">Días de Amor</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4,416</span>
+                    <span class="stat-label">Horas Juntos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Peleas</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería -->
+    <section>
+        <div class="galeria">
+            <h2 class="section-title">Nuestros Momentos</h2>
+            <div class="fotos-grid">
+                <!-- Fila 1: hermosaaaa - vacío - gatonegro -->
+                <div class="foto-item">
+                    <img src="photos/hermosaaaa.JPEG" alt="Hermosa">
+                </div>
+                <div class="foto-item foto-vacia"></div>
+                <div class="foto-item">
+                    <img src="photos/gatonegro.JPEG" alt="Gatito">
+                </div>
+
+                <!-- Fila 2: vacío - VIDEO (beso.MP4) - vacío -->
+                <div class="foto-item foto-vacia"></div>
+                <div class="foto-item">
+                    <video src="photos/beso.MP4" autoplay loop muted playsinline></video>
+                </div>
+                <div class="foto-item foto-vacia"></div>
+
+                <!-- Fila 3: maquillaje - vacío - sonrisa -->
+                <div class="foto-item">
+                    <img src="photos/maquillaje.JPEG" alt="Maquillaje">
+                </div>
+                <div class="foto-item foto-vacia"></div>
+                <div class="foto-item">
+                    <img src="photos/sonrisa.JPEG" alt="Sonrisa">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carta -->
+    <section>
+        <div class="carta">
+            <h2 class="section-title">Para Ti, Patico</h2>
+            <div class="carta-contenido">
+                <div class="carta-saludo">Mi Naomy,</div>
+                <p class="carta-texto">
+                    Hoy cumplimos 6 meses juntos y cada día a tu lado se siente demasiado bienuwu. Desde el primer momento supe que eras espeshial, mas por todas las cosas random que dices y tus chistes de reputamierdad, te amo.
+                </p>
+                <p class="carta-texto">
+                    Amo que hagamos distintas cosas juntos, que estemos comiendo viendo algo, que ahora ultimo hayamos salido casi todo el día y solo nos hayamos reído y divertido, humillarte en el juego de fnfayerrr en la vida real XDD.
+                </p>
+                <p class="carta-texto">
+                    Cada conversación, cada risa, cada "te amo" es muy valioso para mí, sabiendo lo poto de pingüino que eres. Eres todo lo que tengo y lo que siempre quise, no digas que nada de lo que me has dado hasta ahora no es suficiente, yo entiendo que vayas a tu ritmo o no lo se, pero me gusto mucho la carta que me hiciste a manito, tu letra es tan linda, dibujas precioso tambienjejeje.
+                </p>
+                <p class="carta-texto">
+                    Gracias por estos 6 meses aunque no sean perfectos, amo estar contigo, Solo espero que vengan muchos meses más de amor, risas y felicidad juntos.
+                </p>
+                <div class="carta-firma">Con todo mi amor, Johanzu</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Playlist -->
+    <section id="music">
+        <div class="playlist">
+            <h2 class="section-title">Canciones que me Recuerdan a Ti</h2>
+            
+            <div class="song-item">
+                <div class="song-number">01</div>
+                <div class="song-info">
+                    <div class="song-title">Como Dormiste Bebé</div>
+                    <div class="song-artist">Rels B</div>
+                    <div class="song-reason">Con esta canción comenzamos a hablar por Instagram muehehe.</div>
+                </div>
+                <button class="play-btn" onclick="togglePlay('audio1', this)">▶️</button>
+            </div>
+            <div class="audio-player">
+                <audio id="audio1" controls>
+                    <source src="music/Rels B - cómo dormiste_ (Video Oficial).mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="song-item">
+                <div class="song-number">02</div>
+                <div class="song-info">
+                    <div class="song-title">Bound 2</div>
+                    <div class="song-artist">Kanye West</div>
+                    <div class="song-reason">El puto fokin negro bello q amas</div>
+                </div>
+                <button class="play-btn" onclick="togglePlay('audio2', this)">▶️</button>
+            </div>
+            <div class="audio-player">
+                <audio id="audio2" controls>
+                    <source src="music/Kanye West - Bound 2  (Sub. Español).mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="song-item">
+                <div class="song-number">03</div>
+                <div class="song-info">
+                    <div class="song-title">Comenzar de Nuevo</div>
+                    <div class="song-artist">Jhovan Tomasevich</div>
+                    <div class="song-reason">La canción que me dijiste que te recuerda a mí. Por cómo estamos ahora, un poco distantes ñañañaña te amo.</div>
+                </div>
+                <button class="play-btn" onclick="togglePlay('audio3', this)">▶️</button>
+            </div>
+            <div class="audio-player">
+                <audio id="audio3" controls>
+                    <source src="music/Comenzar de nuevo - Jhovan Tomasevich (Letra).mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <span class="heart">♥</span>
+        6 meses de amor, infinitos más por venir<br>
+        Te amo, Cocosini Mama
+    </footer>
+
+    <script>
+        // Guardar los valores originales
+        const counterTargets = new Map();
+
+        // Animación de contadores
+        function animateCounter(element, target, duration = 2000) {
+            // Cancelar cualquier animación previa
+            if (element.animationTimer) {
+                clearInterval(element.animationTimer);
+            }
+
+            let start = 0;
+            const increment = target / (duration / 16);
+            element.animationTimer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target.toLocaleString();
+                    clearInterval(element.animationTimer);
+                } else {
+                    element.textContent = Math.floor(start).toLocaleString();
+                }
+            }, 16);
+        }
+
+        // Intersection Observer para activar/desactivar la animación
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const counters = entry.target.querySelectorAll('.stat-number');
+                
+                if (entry.isIntersecting) {
+                    // Cuando entra en vista: animar
+                    counters.forEach(counter => {
+                        const target = counterTargets.get(counter) || counter.textContent.replace(/,/g, '');
+                        if (!isNaN(target)) {
+                            counterTargets.set(counter, target);
+                            counter.textContent = '0';
+                            animateCounter(counter, parseInt(target));
+                        }
+                    });
+                } else {
+                    // Cuando sale de vista: resetear a 0
+                    counters.forEach(counter => {
+                        if (counter.animationTimer) {
+                            clearInterval(counter.animationTimer);
+                        }
+                        const target = counterTargets.get(counter);
+                        if (target && !isNaN(target)) {
+                            counter.textContent = '0';
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observar la sección de estadísticas
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+
+        // Función para controlar play/pause de audio
+        function togglePlay(audioId, button) {
+            const audio = document.getElementById(audioId);
+            const allAudios = document.querySelectorAll('audio');
+            const allButtons = document.querySelectorAll('.play-btn');
+            
+            // Pausar todos los otros audios
+            allAudios.forEach((a, index) => {
+                if (a.id !== audioId && !a.paused) {
+                    a.pause();
+                    allButtons[index].textContent = '▶️';
+                }
+            });
+            
+            // Toggle del audio actual
+            if (audio.paused) {
+                audio.play();
+                button.textContent = '⏸️';
+            } else {
+                audio.pause();
+                button.textContent = '▶️';
+            }
+            
+            // Actualizar botón cuando la canción termina
+            audio.onended = function() {
+                button.textContent = '▶️';
+            };
+        }
+    </script>
+</body>
+</html>
